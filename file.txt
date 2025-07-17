@@ -1,0 +1,37 @@
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/Seven7lua/Roblox/refs/heads/main/Librarys/Orion/Orion.lua'))()
+local Window = OrionLib:MakeWindow({Name = "Kill Aura", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Tab = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998"})
+
+local killAuraActive = false
+local killLoop = nil
+
+Tab:AddToggle({
+    Name = "Kill Aura",
+    Callback = function(Value)
+        killAuraActive = Value
+        if Value then
+            -- Start the loop
+            killLoop = task.spawn(function()
+                while killAuraActive do
+                    task.wait(0.9) -- Delay between checks
+                    
+                    -- Optimized targeting: Only check players
+                    for _, player in ipairs(game.Players:GetPlayers()) do
+                        if player ~= game.Players.LocalPlayer then
+                            local character = player.Character
+                            if character and character:FindFirstChild("Humanoid") then
+                                character.Humanoid.Health = 0
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            -- Terminate the loop
+            if killLoop then
+                task.cancel(killLoop)
+                killLoop = nil
+            end
+        end
+    end
+})
