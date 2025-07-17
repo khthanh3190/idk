@@ -1,16 +1,42 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Seven7lua/Roblox/refs/heads/main/Librarys/Orion/Orion.lua')))()
-local Window = OrionLib:MakeWindow({Name = "Kill Aura", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Seven7-lua/Roblox/refs/heads/main/Librarys/Orion/Orion.lua')))()
+local Window = OrionLib:MakeWindow({Name = "test", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-
-Tab:AddToggle({
-	Name = "Kill Aura",
+local Section = Tab:AddSection({
+	Name = "lưu ý"
+})
+Tab:AddButton({
+	Name = "kill aura",
 	Callback = function()
 getgenv().G = true
-while getgenv().G do
+getgenv().Creator = 'https://discord.gg/B3HqPPzFYr - HalloweenGaster'
+while getgenv().G and getgenv().Creator == 'https://discord.gg/B3HqPPzFYr - HalloweenGaster' do
+wait(0.9)
+sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 112412400000)
+sethiddenproperty(game.Players.LocalPlayer, "MaxSimulationRadius", 112412400000)
+for i,d in pairs(game.Workspace:GetDescendants()) do
+    if d.ClassName == 'Humanoid' and d.Parent.Name ~= game.Players.LocalPlayer.Name then
+        d.Health = 0
+    end
+end
+end
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "tắt kill aura",
+	Callback = function()
+getgenv().G = false
+getgenv().Creator = 'https://discord.gg/B3HqPPzFYr - HalloweenGaster'
+while getgenv().G and getgenv().Creator == 'https://discord.gg/B3HqPPzFYr - HalloweenGaster' do
 wait(0.9)
 sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 112412400000)
 sethiddenproperty(game.Players.LocalPlayer, "MaxSimulationRadius", 112412400000)
