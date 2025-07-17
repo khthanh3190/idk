@@ -1,37 +1,25 @@
-local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/Seven7lua/Roblox/refs/heads/main/Librarys/Orion/Orion.lua'))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Seven7lua/Roblox/refs/heads/main/Librarys/Orion/Orion.lua')))()
 local Window = OrionLib:MakeWindow({Name = "Kill Aura", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
-local Tab = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998"})
-
-local killAuraActive = false
-local killLoop = nil
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 
 Tab:AddToggle({
-    Name = "Kill Aura",
-    Callback = function(Value)
-        killAuraActive = Value
-        if Value then
-            -- Start the loop
-            killLoop = task.spawn(function()
-                while killAuraActive do
-                    task.wait(0.9) -- Delay between checks
-                    
-                    -- Optimized targeting: Only check players
-                    for _, player in ipairs(game.Players:GetPlayers()) do
-                        if player ~= game.Players.LocalPlayer then
-                            local character = player.Character
-                            if character and character:FindFirstChild("Humanoid") then
-                                character.Humanoid.Health = 0
-                            end
-                        end
-                    end
-                end
-            end)
-        else
-            -- Terminate the loop
-            if killLoop then
-                task.cancel(killLoop)
-                killLoop = nil
-            end
-        end
+	Name = "Kill Aura",
+	Callback = function()
+getgenv().G = true
+while getgenv().G do
+wait(0.9)
+sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 112412400000)
+sethiddenproperty(game.Players.LocalPlayer, "MaxSimulationRadius", 112412400000)
+for i,d in pairs(game.Workspace:GetDescendants()) do
+    if d.ClassName == 'Humanoid' and d.Parent.Name ~= game.Players.LocalPlayer.Name then
+        d.Health = 0
     end
+end
+end
+      		print("button pressed")
+  	end    
 })
